@@ -11,6 +11,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.view.View;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import java.util.Random;
 
 public class JogosActivity extends AppCompatActivity {
 
@@ -21,7 +25,8 @@ public class JogosActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_jogos);
 
-        getSupportActionBar().setElevation(0);
+        //getSupportActionBar().setElevation(0);
+        //this.determinarEscolha();
 
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.frameConteudo, cara_coroa_fragment);
@@ -40,5 +45,13 @@ public class JogosActivity extends AppCompatActivity {
     /*public void acessarJogo(View view){
 
     }*/
+
+    public int determinarEscolha(){
+        Bundle envolvidos = getIntent().getExtras();
+        String Envolvidos[] = {envolvidos.getString("pessoa1"), envolvidos.getString("pessoa2")};
+        int escolha = new Random().nextInt(1);
+        //Toast.makeText(getApplicationContext(), textEscolha.getText(), Toast.LENGTH_LONG).show();
+        return escolha;
+    }
 
 }
