@@ -8,6 +8,8 @@ import com.yannfigueiredo.brigaentreirmaos.R;
 import com.yannfigueiredo.brigaentreirmaos.fragment.CaraCoroaFragment;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.view.View;
@@ -25,12 +27,15 @@ public class JogosActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_jogos);
 
-        //getSupportActionBar().setElevation(0);
-        //this.determinarEscolha();
+        Bundle bundle = new Bundle();
+        Bundle envolvidos = getIntent().getExtras();
+        bundle.putString("pessoa1", envolvidos.getString("pessoa1"));
+        bundle.putString("pessoa2", envolvidos.getString("pessoa2"));
 
-        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.replace(R.id.frameConteudo, cara_coroa_fragment);
-        transaction.commit();
+        cara_coroa_fragment.setArguments(bundle);
+
+        FragmentManager transaction = getSupportFragmentManager();
+        transaction.beginTransaction().replace(R.id.frameConteudo, cara_coroa_fragment).commit();
 
         FloatingActionButton fab = findViewById(R.id.fabHistorico);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -46,12 +51,10 @@ public class JogosActivity extends AppCompatActivity {
 
     }*/
 
-    public int determinarEscolha(){
-        Bundle envolvidos = getIntent().getExtras();
-        String Envolvidos[] = {envolvidos.getString("pessoa1"), envolvidos.getString("pessoa2")};
+    public void determinarEscolha(){
         int escolha = new Random().nextInt(1);
-        //Toast.makeText(getApplicationContext(), textEscolha.getText(), Toast.LENGTH_LONG).show();
-        return escolha;
+        TextView textEscolha = findViewById(R.id.textEscolha);
+        textEscolha.setText("Caralhoooo");
     }
 
 }
