@@ -6,6 +6,7 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,9 +18,14 @@ import android.widget.Toast;
 import com.yannfigueiredo.brigaentreirmaos.R;
 import com.yannfigueiredo.brigaentreirmaos.activity.JogosActivity;
 
+import java.io.FileOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+
+import static android.content.Context.MODE_APPEND;
+import static android.content.Context.MODE_ENABLE_WRITE_AHEAD_LOGGING;
+import static android.content.Context.MODE_PRIVATE;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -30,6 +36,7 @@ public class CaraCoroaFragment extends Fragment {
     private Button buttonCara, buttonCoroa, buttonLancar;
     private ImageView imageMoeda;
     private List<String> envolvidos = new ArrayList<>();
+    public String registro = "";
 
     public CaraCoroaFragment() {
     }
@@ -81,9 +88,11 @@ public class CaraCoroaFragment extends Fragment {
                 if (faces[faceSorteada].equals(escolhaFace)){
                     Toast.makeText(getContext(), escolhido+" venceu!", Toast.LENGTH_LONG).show();
                     atualizarImagem(faces[faceSorteada]);
+                    registro += "Ganhador: "+escolhido+" - Escolha: "+escolhaFace+",";
                 }else{
                     Toast.makeText(getContext(), outro()+" venceu!", Toast.LENGTH_LONG).show();
                     atualizarImagem(faces[faceSorteada]);
+                    registro += "Ganhador: "+outro()+" - Escolha: "+faces[faceSorteada]+",";
                 }
             }
         });

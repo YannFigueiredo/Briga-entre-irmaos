@@ -1,5 +1,6 @@
 package com.yannfigueiredo.brigaentreirmaos.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -12,10 +13,12 @@ import com.yannfigueiredo.brigaentreirmaos.fragment.ParImparFragment;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import java.io.FileOutputStream;
 import java.util.Random;
 
 public class JogosActivity extends AppCompatActivity {
@@ -53,10 +56,23 @@ public class JogosActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                Intent intent = new Intent(getApplicationContext(), HistoricoActivity.class);
+                startActivity(intent);
+
+                gravarArquivoTexto();
             }
         });
+    }
+
+    public void gravarArquivoTexto() {
+        FileOutputStream out = null;
+        try {
+            out = openFileOutput("historicoLog.txt", MODE_PRIVATE);
+            out.write(cara_coroa_fragment.registro.getBytes());
+            out.close();
+        } catch (Exception e) {
+            Log.e("ERRO", e.getMessage());
+        }
     }
 
     public void acessarJogo(View view){
