@@ -25,6 +25,8 @@ public class JogosActivity extends AppCompatActivity {
     private JokenpoFragment jokenpo_fragment = new JokenpoFragment();
     private Button buttonCaraCoroa, buttonParImpar, buttonJokenpo;
 
+    private Bundle bundle = new Bundle();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,8 +36,9 @@ public class JogosActivity extends AppCompatActivity {
         this.buttonParImpar = findViewById(R.id.buttonParImpar);
         this.buttonJokenpo = findViewById(R.id.buttonJokenpo);
 
-        Bundle bundle = new Bundle();
+
         Bundle envolvidos = getIntent().getExtras();
+
         bundle.putString("pessoa1", envolvidos.getString("pessoa1"));
         bundle.putString("pessoa2", envolvidos.getString("pessoa2"));
 
@@ -58,24 +61,21 @@ public class JogosActivity extends AppCompatActivity {
 
     public void acessarJogo(View view){
         if(view.getId()==R.id.buttonCaraCoroa){
+            cara_coroa_fragment.setArguments(bundle);
             FragmentManager transaction = getSupportFragmentManager();
             transaction.beginTransaction().replace(R.id.frameConteudo, cara_coroa_fragment).commit();
             destacarButton("CaraCoroa");
         }else if(view.getId()==R.id.buttonParImpar){
+            par_impar_fragment.setArguments(bundle);
             FragmentManager transaction = getSupportFragmentManager();
             transaction.beginTransaction().replace(R.id.frameConteudo, par_impar_fragment).commit();
             destacarButton("ParImpar");
         }else if(view.getId()==R.id.buttonJokenpo){
+            jokenpo_fragment.setArguments(bundle);
             FragmentManager transaction = getSupportFragmentManager();
             transaction.beginTransaction().replace(R.id.frameConteudo, jokenpo_fragment).commit();
             destacarButton("Jokenpo");
         }
-    }
-
-    public void determinarEscolha(){
-        int escolha = new Random().nextInt(1);
-        TextView textEscolha = findViewById(R.id.textEscolha);
-        textEscolha.setText("Caralhoooo");
     }
 
     public void destacarButton(String buttonDestacado){
