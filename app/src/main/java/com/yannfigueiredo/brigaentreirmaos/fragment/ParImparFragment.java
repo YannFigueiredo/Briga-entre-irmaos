@@ -29,6 +29,7 @@ public class ParImparFragment extends Fragment {
     private Button buttonPar, buttonImpar;
     private ImageView imagePessoa1, imagePessoa2;
     private TextView textPessoa1, textPessoa2, textEscolha, textResultado;
+    public String registro = "";
 
     public ParImparFragment() {
         // Required empty public constructor
@@ -117,16 +118,20 @@ public class ParImparFragment extends Fragment {
         if(somaMaos % 2 == 0){
             this.textResultado.setText("Resultado: Par");
             if(this.escolhaParImpar == "Par"){
-                Toast.makeText(getContext(), this.escolhido+" venceu!", Toast.LENGTH_LONG).show();
+                Toast.makeText(getContext(), this.escolhido+" venceu!", Toast.LENGTH_SHORT).show();
+                registro += "Ganhador: "+this.escolhido+" - Escolha: Par,";
             }else{
-                Toast.makeText(getContext(), this.outro()+" venceu!", Toast.LENGTH_LONG).show();
+                Toast.makeText(getContext(), this.outro()+" venceu!", Toast.LENGTH_SHORT).show();
+                registro += "Ganhador: "+outro()+" - Escolha: Par,";
             }
         }else{
             this.textResultado.setText("Resultado: Ímpar");
             if(this.escolhaParImpar == "Impar"){
-                Toast.makeText(getContext(), this.escolhido+" venceu!", Toast.LENGTH_LONG).show();
+                Toast.makeText(getContext(), this.escolhido+" venceu!", Toast.LENGTH_SHORT).show();
+                registro += "Ganhador: "+this.escolhido+" - Escolha: Ímpar,";
             }else{
-                Toast.makeText(getContext(), this.outro()+" venceu!", Toast.LENGTH_LONG).show();
+                Toast.makeText(getContext(), this.outro()+" venceu!", Toast.LENGTH_SHORT).show();
+                registro += "Ganhador: "+outro()+" - Escolha: Ímpar,";
             }
         }
     }

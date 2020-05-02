@@ -1,11 +1,13 @@
 package com.yannfigueiredo.brigaentreirmaos.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.LinearLayout;
 
 import com.yannfigueiredo.brigaentreirmaos.Adaptador.Adapter;
 import com.yannfigueiredo.brigaentreirmaos.Modelo.Registro;
@@ -34,6 +36,7 @@ public class HistoricoActivity extends AppCompatActivity {
 
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
         this.recyclerView.setLayoutManager(layoutManager);
+        this.recyclerView.addItemDecoration(new DividerItemDecoration(getApplicationContext(), LinearLayout.VERTICAL));
         this.recyclerView.setAdapter(adaptador);
     }
 

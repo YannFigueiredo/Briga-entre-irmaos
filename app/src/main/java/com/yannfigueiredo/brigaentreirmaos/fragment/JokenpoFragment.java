@@ -28,6 +28,7 @@ public class JokenpoFragment extends Fragment {
     private List<String> envolvidos = new ArrayList<>();
     private ImageView imagePessoa1, imagePessoa2, buttonPedra, buttonPapel, buttonTesoura;
     private TextView textPessoa1, textPessoa2, textEscolha;
+    public String registro = "";
 
     public JokenpoFragment() {
         // Required empty public constructor
@@ -116,19 +117,26 @@ public class JokenpoFragment extends Fragment {
     public void checarResultado(int maoPessoa2){
         String mao[] = {"Pedra", "Papel", "Tesoura"};
         if(this.escolhaJokenpo.equals(mao[maoPessoa2])){
-            Toast.makeText(getContext(), "Empate!", Toast.LENGTH_LONG).show();
+            Toast.makeText(getContext(), "Empate!", Toast.LENGTH_SHORT).show();
+            registro += "Ganhador: Empate - Escolha: "+this.escolhaJokenpo+",";
         }else if(this.escolhaJokenpo.equals("Pedra") && mao[maoPessoa2].equals("Tesoura")){
-            Toast.makeText(getContext(), this.escolhido+" venceu!", Toast.LENGTH_LONG).show();
+            Toast.makeText(getContext(), this.escolhido+" venceu!", Toast.LENGTH_SHORT).show();
+            registro += "Ganhador: "+this.escolhido+" - Escolha: Pedra,";
         }else if(this.escolhaJokenpo.equals("Pedra") && mao[maoPessoa2].equals("Papel")){
-            Toast.makeText(getContext(), this.outro()+" venceu!", Toast.LENGTH_LONG).show();
+            Toast.makeText(getContext(), this.outro()+" venceu!", Toast.LENGTH_SHORT).show();
+            registro += "Ganhador: "+outro()+" - Escolha: Pedra,";
         }else if(this.escolhaJokenpo.equals("Papel") && mao[maoPessoa2].equals("Pedra")){
-            Toast.makeText(getContext(), this.escolhido+" venceu!", Toast.LENGTH_LONG).show();
+            Toast.makeText(getContext(), this.escolhido+" venceu!", Toast.LENGTH_SHORT).show();
+            registro += "Ganhador: "+this.escolhido+" - Escolha: Papel,";
         }else if(this.escolhaJokenpo.equals("Papel") && mao[maoPessoa2].equals("Tesoura")){
-            Toast.makeText(getContext(), this.outro()+" venceu!", Toast.LENGTH_LONG).show();
+            Toast.makeText(getContext(), this.outro()+" venceu!", Toast.LENGTH_SHORT).show();
+            registro += "Ganhador: "+outro()+" - Escolha: Papel,";
         }else if(this.escolhaJokenpo.equals("Tesoura") && mao[maoPessoa2].equals("Papel")){
-            Toast.makeText(getContext(), this.escolhido+" venceu!", Toast.LENGTH_LONG).show();
+            Toast.makeText(getContext(), this.escolhido+" venceu!", Toast.LENGTH_SHORT).show();
+            registro += "Ganhador: "+this.escolhido+" - Escolha: Tesoura,";
         }else if(this.escolhaJokenpo.equals("Tesoura") && mao[maoPessoa2].equals("Pedra")){
-            Toast.makeText(getContext(), this.outro()+" venceu!", Toast.LENGTH_LONG).show();
+            Toast.makeText(getContext(), this.outro()+" venceu!", Toast.LENGTH_SHORT).show();
+            registro += "Ganhador: "+outro()+" - Escolha: Tesoura,";
         }
     }
 

@@ -27,6 +27,8 @@ public class JogosActivity extends AppCompatActivity {
     private ParImparFragment par_impar_fragment = new ParImparFragment();
     private JokenpoFragment jokenpo_fragment = new JokenpoFragment();
     private Button buttonCaraCoroa, buttonParImpar, buttonJokenpo;
+    private String registro = "";
+    private boolean cara_coroa, par_impar, jokenpo;
 
     private Bundle bundle = new Bundle();
 
@@ -59,16 +61,18 @@ public class JogosActivity extends AppCompatActivity {
                 Intent intent = new Intent(getApplicationContext(), HistoricoActivity.class);
                 startActivity(intent);
 
-                gravarArquivoTexto();
+                determinarHistorico();
+
+                gravarArquivoTexto(registro);
             }
         });
     }
 
-    public void gravarArquivoTexto() {
+    public void gravarArquivoTexto(String registro) {
         FileOutputStream out = null;
         try {
             out = openFileOutput("historicoLog.txt", MODE_PRIVATE);
-            out.write(cara_coroa_fragment.registro.getBytes());
+            out.write(registro.getBytes());
             out.close();
         } catch (Exception e) {
             Log.e("ERRO", e.getMessage());
@@ -99,14 +103,33 @@ public class JogosActivity extends AppCompatActivity {
             buttonCaraCoroa.setBackgroundResource(R.drawable.button_destacado);
             buttonParImpar.setBackgroundResource(R.drawable.button_nao_destacado);
             buttonJokenpo.setBackgroundResource(R.drawable.button_nao_destacado);
+            this.cara_coroa = true;
+            this.par_impar = false;
+            this.jokenpo = false;
         }else if(buttonDestacado.equals("ParImpar")){
             buttonParImpar.setBackgroundResource(R.drawable.button_destacado);
             buttonCaraCoroa.setBackgroundResource(R.drawable.button_nao_destacado);
             buttonJokenpo.setBackgroundResource(R.drawable.button_nao_destacado);
+            this.par_impar = true;
+            this.cara_coroa = false;
+            this.jokenpo = false;
         }else{
             buttonJokenpo.setBackgroundResource(R.drawable.button_destacado);
             buttonCaraCoroa.setBackgroundResource(R.drawable.button_nao_destacado);
             buttonParImpar.setBackgroundResource(R.drawable.button_nao_destacado);
+            this.jokenpo = true;
+            this.cara_coroa = false;
+            this.par_impar = false;
+        }
+    }
+
+    public void determinarHistorico(){
+        if(this.cara_coroa == true){
+            this.registro = cara_coroa_fragment.registro;
+        }else if(this.par_impar == true){
+            this.registro = par_impar_fragment.registro;
+        }else if(this.jokenpo == true){
+            this.registro = jokenpo_fragment.registro;
         }
     }
 

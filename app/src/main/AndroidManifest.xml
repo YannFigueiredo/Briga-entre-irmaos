@@ -9,12 +9,14 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activity.HistoricoActivity" />
+        <activity android:name=".activity.HistoricoActivity"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".activity.JogosActivity"
             android:label="@string/title_activity_jogos"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".activity.MainActivity">
+            android:theme="@style/AppTheme.NoActionBar"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".activity.MainActivity" android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

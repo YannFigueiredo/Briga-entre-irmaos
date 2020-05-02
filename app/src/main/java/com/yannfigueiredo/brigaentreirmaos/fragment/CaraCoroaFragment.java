@@ -85,14 +85,18 @@ public class CaraCoroaFragment extends Fragment {
             public void onClick(View v) {
                 String faces[] = {"Cara", "Coroa"};
                 int faceSorteada = new Random().nextInt(2);
-                if (faces[faceSorteada].equals(escolhaFace)){
-                    Toast.makeText(getContext(), escolhido+" venceu!", Toast.LENGTH_LONG).show();
-                    atualizarImagem(faces[faceSorteada]);
-                    registro += "Ganhador: "+escolhido+" - Escolha: "+escolhaFace+",";
-                }else{
-                    Toast.makeText(getContext(), outro()+" venceu!", Toast.LENGTH_LONG).show();
-                    atualizarImagem(faces[faceSorteada]);
-                    registro += "Ganhador: "+outro()+" - Escolha: "+faces[faceSorteada]+",";
+                if (escolhaFace == null){
+                    Toast.makeText(getContext(), escolhido+ " ainda não escolheu!", Toast.LENGTH_SHORT).show();
+                }else {
+                    if (faces[faceSorteada].equals(escolhaFace)) {
+                        Toast.makeText(getContext(), escolhido + " venceu!", Toast.LENGTH_SHORT).show();
+                        atualizarImagem(faces[faceSorteada]);
+                        registro += "Ganhador: " + escolhido + " - Escolha: " + escolhaFace + ",";
+                    } else {
+                        Toast.makeText(getContext(), outro() + " venceu!", Toast.LENGTH_SHORT).show();
+                        atualizarImagem(faces[faceSorteada]);
+                        registro += "Ganhador: " + outro() + " - Escolha: " + faces[faceSorteada] + ",";
+                    }
                 }
             }
         });
