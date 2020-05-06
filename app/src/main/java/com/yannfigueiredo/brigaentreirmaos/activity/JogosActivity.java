@@ -1,6 +1,7 @@
 package com.yannfigueiredo.brigaentreirmaos.activity;
 
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -29,6 +30,7 @@ public class JogosActivity extends AppCompatActivity {
     private Button buttonCaraCoroa, buttonParImpar, buttonJokenpo;
     private String registro = "";
     private boolean cara_coroa, par_impar, jokenpo;
+    private MediaPlayer mediaPlayer;
 
     private Bundle bundle = new Bundle();
 
@@ -59,6 +61,7 @@ public class JogosActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), HistoricoActivity.class);
+                executarSomBotao();
                 startActivity(intent);
 
                 determinarHistorico();
@@ -81,16 +84,19 @@ public class JogosActivity extends AppCompatActivity {
 
     public void acessarJogo(View view){
         if(view.getId()==R.id.buttonCaraCoroa){
+            executarSomBotao();
             cara_coroa_fragment.setArguments(bundle);
             FragmentManager transaction = getSupportFragmentManager();
             transaction.beginTransaction().replace(R.id.frameConteudo, cara_coroa_fragment).commit();
             destacarButton("CaraCoroa");
         }else if(view.getId()==R.id.buttonParImpar){
+            executarSomBotao();
             par_impar_fragment.setArguments(bundle);
             FragmentManager transaction = getSupportFragmentManager();
             transaction.beginTransaction().replace(R.id.frameConteudo, par_impar_fragment).commit();
             destacarButton("ParImpar");
         }else if(view.getId()==R.id.buttonJokenpo){
+            executarSomBotao();
             jokenpo_fragment.setArguments(bundle);
             FragmentManager transaction = getSupportFragmentManager();
             transaction.beginTransaction().replace(R.id.frameConteudo, jokenpo_fragment).commit();
@@ -131,6 +137,11 @@ public class JogosActivity extends AppCompatActivity {
         }else if(this.jokenpo == true){
             this.registro = jokenpo_fragment.registro;
         }
+    }
+
+    public void executarSomBotao(){
+        mediaPlayer = MediaPlayer.create(getApplicationContext(), R.raw.clickbotao);
+        mediaPlayer.start();
     }
 
 }

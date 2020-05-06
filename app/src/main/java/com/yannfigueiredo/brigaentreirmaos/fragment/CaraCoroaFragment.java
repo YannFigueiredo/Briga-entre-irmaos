@@ -2,6 +2,7 @@ package com.yannfigueiredo.brigaentreirmaos.fragment;
 
 
 import android.annotation.SuppressLint;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -37,6 +38,7 @@ public class CaraCoroaFragment extends Fragment {
     private ImageView imageMoeda;
     private List<String> envolvidos = new ArrayList<>();
     public String registro = "";
+    private MediaPlayer mediaPlayer;
 
     public CaraCoroaFragment() {
     }
@@ -52,6 +54,8 @@ public class CaraCoroaFragment extends Fragment {
         this.buttonLancar = view.findViewById(R.id.buttonLancar);
         this.imageMoeda = view.findViewById(R.id.imageMoeda);
 
+        this.escolhaFace = null;
+
         Bundle dadosEnvolvidos = getArguments();
         
         this.escolhido = determinarEscolha(dadosEnvolvidos.getString("pessoa1"), dadosEnvolvidos.getString("pessoa2"));
@@ -63,6 +67,7 @@ public class CaraCoroaFragment extends Fragment {
          buttonCara.setOnClickListener(new View.OnClickListener() {
              @Override
              public void onClick(View v) {
+                 executarSomBotao();
                  buttonCara.setBackgroundResource(R.drawable.background_button_selecionado);
                  buttonCoroa.setBackgroundResource(R.drawable.background_button);
                  escolhaFace = "Cara";
@@ -73,6 +78,7 @@ public class CaraCoroaFragment extends Fragment {
         buttonCoroa.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                executarSomBotao();
                 buttonCoroa.setBackgroundResource(R.drawable.background_button_selecionado);
                 buttonCara.setBackgroundResource(R.drawable.background_button);
                 escolhaFace = "Coroa";
@@ -85,9 +91,11 @@ public class CaraCoroaFragment extends Fragment {
             public void onClick(View v) {
                 String faces[] = {"Cara", "Coroa"};
                 int faceSorteada = new Random().nextInt(2);
+
                 if (escolhaFace == null){
                     Toast.makeText(getContext(), escolhido+ " ainda não escolheu!", Toast.LENGTH_SHORT).show();
                 }else {
+                    executarSomMoeda();
                     if (faces[faceSorteada].equals(escolhaFace)) {
                         Toast.makeText(getContext(), escolhido + " venceu!", Toast.LENGTH_SHORT).show();
                         atualizarImagem(faces[faceSorteada]);
@@ -127,5 +135,15 @@ public class CaraCoroaFragment extends Fragment {
         }
         return outro;
     }
-    
+
+    public void executarSomBotao(){
+        mediaPlayer = MediaPlayer.create(getContext(), R.raw.clickbotao);
+        mediaPlayer.start();
+    }
+
+    public void executarSomMoeda(){
+        mediaPlayer = MediaPlayer.create(getContext(), R.raw.sommoeda);
+        mediaPlayer.start();
+    }
+
 }

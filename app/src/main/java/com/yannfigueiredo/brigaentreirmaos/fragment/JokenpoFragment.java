@@ -1,6 +1,7 @@
 package com.yannfigueiredo.brigaentreirmaos.fragment;
 
 
+import android.media.MediaPlayer;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -29,6 +30,7 @@ public class JokenpoFragment extends Fragment {
     private ImageView imagePessoa1, imagePessoa2, buttonPedra, buttonPapel, buttonTesoura;
     private TextView textPessoa1, textPessoa2, textEscolha;
     public String registro = "";
+    private MediaPlayer mediaPlayer;
 
     public JokenpoFragment() {
         // Required empty public constructor
@@ -63,6 +65,7 @@ public class JokenpoFragment extends Fragment {
         this.buttonPedra.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                executarSomBotao();
                 imagePessoa1.setImageResource(R.drawable.pedra);
                 escolhaJokenpo = "Pedra";
                 definirEscolhaPessoa2();
@@ -72,6 +75,7 @@ public class JokenpoFragment extends Fragment {
         this.buttonPapel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                executarSomBotao();
                 imagePessoa1.setImageResource(R.drawable.papel);
                 escolhaJokenpo = "Papel";
                 definirEscolhaPessoa2();
@@ -81,6 +85,7 @@ public class JokenpoFragment extends Fragment {
         this.buttonTesoura.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                executarSomBotao();
                 imagePessoa1.setImageResource(R.drawable.tesoura);
                 escolhaJokenpo = "Tesoura";
                 definirEscolhaPessoa2();
@@ -138,6 +143,11 @@ public class JokenpoFragment extends Fragment {
             Toast.makeText(getContext(), this.outro()+" venceu!", Toast.LENGTH_SHORT).show();
             registro += "Ganhador: "+outro()+" - Escolha: Tesoura,";
         }
+    }
+
+    public void executarSomBotao(){
+        mediaPlayer = MediaPlayer.create(getContext(), R.raw.clickbotao);
+        mediaPlayer.start();
     }
 
 }

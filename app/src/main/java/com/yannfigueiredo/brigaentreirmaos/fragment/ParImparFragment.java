@@ -1,6 +1,7 @@
 package com.yannfigueiredo.brigaentreirmaos.fragment;
 
 
+import android.media.MediaPlayer;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -30,6 +31,7 @@ public class ParImparFragment extends Fragment {
     private ImageView imagePessoa1, imagePessoa2;
     private TextView textPessoa1, textPessoa2, textEscolha, textResultado;
     public String registro = "";
+    private MediaPlayer mediaPlayer;
 
     public ParImparFragment() {
         // Required empty public constructor
@@ -65,6 +67,7 @@ public class ParImparFragment extends Fragment {
         buttonPar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                executarSomBotao();
                 escolhaParImpar = "Par";
                 buttonPar.setBackgroundResource(R.drawable.background_button_selecionado);
                 buttonImpar.setBackgroundResource(R.drawable.background_button);
@@ -75,6 +78,7 @@ public class ParImparFragment extends Fragment {
         buttonImpar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                executarSomBotao();
                 escolhaParImpar = "Impar";
                 buttonImpar.setBackgroundResource(R.drawable.background_button_selecionado);
                 buttonPar.setBackgroundResource(R.drawable.background_button);
@@ -134,5 +138,10 @@ public class ParImparFragment extends Fragment {
                 registro += "Ganhador: "+outro()+" - Escolha: Ímpar,";
             }
         }
+    }
+
+    public void executarSomBotao(){
+        mediaPlayer = MediaPlayer.create(getContext(), R.raw.clickbotao);
+        mediaPlayer.start();
     }
 }
